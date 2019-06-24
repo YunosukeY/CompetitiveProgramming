@@ -1,0 +1,32 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) for(int i=0;i<(n);i++)
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define ROF(i,a,b) for(int i=(a)-1;i>=(b);i--)
+#define all(a) (a).begin(),(a).end()
+#define rall(a) (a).rbegin(),(a).rend() //sortで大きい順
+#define UNIQUE(v) v.erase(unique(all(v)),v.end())
+#define SUM(a) accumulate(all(a),0)
+#define pb push_back
+#define fst first
+#define snd second
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef vector<string> vs;
+typedef pair<int,int> pii;
+typedef long long ll;
+
+double r;
+vector<double> a(3),b(3);
+
+int dx[4] = {1, 0, -1, 0}, dy[4] = {0, 1, 0, -1};
+
+main(){
+  cin >> a[0] >> b[0] >> r >> a[1] >> b[1] >> a[2] >> b[2];
+
+  double x,y;
+  rep(i,4){
+    x = a[0] + r * dx[i];
+    y = b[0] + r * dy[i];
+    

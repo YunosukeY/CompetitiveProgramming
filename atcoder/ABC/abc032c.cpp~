@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) for(int i=0;i<(n);i++)
+typedef vector<int> vi;
+typedef long long ll;
+#define int ll
+
+main(){
+  int n,k; cin >> n >> k;
+  vi s(n); rep(i,n){
+    cin >> s[i];
+    if(s[i] == 0){
+      cout << n << endl;
+      return 0;
+    }
+  }
+
+  int maxlen = 0, tail = 0, pro = 1, len = 0;
+  rep(head,n){
+    cout << head << " " << tail << " " << pro << " "<< maxlen << endl;
+    while((pro <= k) and (tail < n)){
+      tail++;
+      len++;
+      pro *= s[tail-1];
+    cout << head << " " << tail << " " << pro << " "<< maxlen << endl;
+    }
+    maxlen = max(maxlen,len-1);
+    cout << head << " " << tail << " " << pro << " "<< maxlen << endl;
+    if(tail <= head){
+      tail = head + 1;
+      pro = 1;
+      len = 0;
+    }else{
+      pro /= s[head];
+      len--;
+    }
+  }
+  cout << maxlen << endl;
+}

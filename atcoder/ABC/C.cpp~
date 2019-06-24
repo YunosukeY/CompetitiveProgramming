@@ -1,0 +1,39 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) for(i=0;i<(n);i++)
+#define For(i,a,b) for(i=(a);i<(b);i++)
+#define all(x) (x).begin(),(x).end()
+typedef long long ll;
+const double PI=acos(-1.0);
+
+
+int main(){
+  int i,j,l;
+  int n,k;
+  int min=200001;
+  int ans=0;
+  int c=0;
+  vector<int> a;
+  cin >> n >> k;
+  a.resize(n);
+  vector<int> b(n,0);
+  rep(i,n){
+    cin >> a[i];
+    if(b[a[i]]==0) c++;
+    b[a[i]]++;
+  }
+  for(l=0;l<=c-k;l++){
+    rep(i,n){
+      if(b[i]!=0 && min>b[i]){
+	j=i;
+	min=b[i];
+      }	
+      c+=b[i];
+      b[j]=0;
+    }
+  }
+
+  cout << c << endl;
+  return 0;
+}

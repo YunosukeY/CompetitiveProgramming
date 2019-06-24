@@ -1,0 +1,27 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) for(i=0;i<(n);i++)
+#define For(i,a,b) for(i=(a);i<(b);i++)
+typedef vector<int> vi;
+typedef vector< vi > vii;  
+
+int main(){
+  int t,n,m;
+  cin >> t >> n;
+  vi takotime(n);
+  rep(i,n) cin >> takotime[i];
+  vi b(m);
+  rep(i,m) cin >> b[i];
+  vi tako(n,1);
+  rep(i,m-1){
+    j=distance(takotime.begin(),lower_bound(takotime.begin(),takotime.end(),b[i]-t));
+    tako[j]--;
+  }
+  if(tako[n]==0) return cout << "no" << endl,0;
+
+  rep(i,n) cout << tako[i] << " ";
+  cout << endl;
+  
+  return 0;
+}

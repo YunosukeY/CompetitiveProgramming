@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) FOR(i,0,n)
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define ROF(i,a,b) for(int i=(a)-1;i>=(b);i--)
+#define all(a) (a).begin(),(a).end()
+#define UNIQUE(v) v.erase(unique(all(v)),v.end())
+#define SUM(a) accumlate(all(a),0)
+typedef vector<int> vi;
+typedef vector<vi> vii;
+typedef vector<string> vs;
+typedef pair<int,int> pii;
+typedef long long ll;
+
+main(){
+  int n,k; cin >> n >> k;
+  vi d(2*k); rep(i,k) cin >> d[i];
+
+  while(1){
+    int x = n;
+    while(1){
+      bool flag = false;
+      //1番下の桁を検査
+      rep(i,k){
+	if(not d[i] == x % 10) continue;
+	flag = true;
+	break;
+      }
+      if(flag) break;
+      x /= 10;
+      if(x == 0){
+	cout << n << endl;
+	return 0;
+      }
+    }
+    n++;
+  }
+
+}

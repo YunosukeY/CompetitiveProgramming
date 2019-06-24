@@ -1,0 +1,28 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) for(int i=0;i<(n);i++)
+#define FOR(i,a,b) for(int i=(a);i<=(b);i++)
+#define ROF(i,a,b) for(int i=(a)-1;i>=(b);i--)
+#define all(a) (a).begin(),(a).end()
+#define rall(a) (a).rbegin(),(a).rend() //sortで大きい順
+#define UNIQUE(v) v.erase(unique(all(v)),v.end())
+#define SUM(a) accumlate(all(a),0)
+#define pb push_back
+#define fst first
+#define snd second
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef vector<string> vs;
+typedef pair<int,int> pii;
+typedef long long ll;
+
+int a[100001],cost[100001];
+
+main(){
+  int n; cin >> n;
+  rep(i,n) cin >> a[i];
+  cost[0] = 0; cost[1] = asb(a[0] - a[1]);
+  rep(i,n-2) cost[i+2] = min(abs(a[i+2] - a[i+1]) + cost[i+1],abs(a[i+2] - a[i]) + cost[i]);
+  cout << cost[n-1] << endl;
+}

@@ -1,0 +1,40 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) FOR(i,0,n)
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define ROF(i,a,b) for(int i=(a)-1;i>=(b);i--)
+#define all(a) (a).begin(),(a).end()
+#define UNIQUE(v) v.erase(unique(all(v)),v.end())
+#define SUM(a) accumlate(all(a),0)
+typedef vector<int> vi;
+typedef vector<vi> vii;
+typedef vector<string> vs;
+typedef pair<int,int> pii;
+typedef long long ll;
+
+main(){
+  int n,k; cin >> n >> k;
+  vii a(2*k+1,vi(2*k+1,0));
+  rep(i,n){
+    int x,y; char c; cin >> x >> y >> c;
+    if(c == 'W') y += k;
+    x %= 2*k;
+    y %= 2*k;
+    if(x-k+1 >= 0){
+      a[x-k+1][y]++;
+      a[x+1][y]--;
+      a[x-k+1][(y+k)%(2*k)]--;
+      a[x+1][(y+k)%(2*k)]++;
+      if(y+k > 2*k){
+	a[x-k+1][2*k]--;
+	a[x+1][2*k]++;
+	a[x-k+1][0]++;
+	a[x+1][0]--;
+      }
+    }else{
+      if(y+k <= 2*k){
+	a[x-k+1][y]++;
+	a[x-k+1][y+k]--;
+	a[
+  

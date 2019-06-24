@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) FOR(i,0,n)
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define ROF(i,a,b) for(int i=(a);i>(b);i--)
+#define all(a) (a).begin(),(a).end()
+#define UNIQUE(v) v.erase(unique(all(v)),v.end())
+typedef vector<int> vi;
+typedef vector<vi> vii;
+typedef vector<string> vs;
+typedef pair<int,int> pii;
+typedef long long ll;
+
+main(){
+  int sx,sy,gx,gy,t,v; cin >> sx >> sy >> gx >> gy >> t >> v;
+  int n,x,y; cin >> n;
+  double d1,d2,d=t*v;
+  bool ans = false;
+  rep(i,n){
+    cin >> x >> y;
+    d1 = sqrt((x-sx)*(x-sx) + (y-sy)*(y-sy));
+    d2 = sqrt((gx-x)*(gx-x) + (gy-y)*(gy-y));
+    if(d>=d1+d2) ans = true;
+  }
+  if(ans) cout << "YES";
+  else cout << "NO";
+  cout << endl;
+}

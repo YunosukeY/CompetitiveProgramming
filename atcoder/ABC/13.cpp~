@@ -1,0 +1,26 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) for(i=0;i<(n);i++)
+#define For(i,a,b) for(i=(a);i<(b);i++)
+typedef vector<int> vi;
+typedef vector< vi > vii;
+
+int main(){
+  int i,j;
+  int x,y;
+  vector< vector<char> > a;
+  while(1){
+    cin >> x >> y;
+    if(x==0 && y==0) break;
+    a.resize(x);
+    rep(i,x){
+      a[i].resize(y);
+      rep(j,y) cin >> a[i][j];
+    }
+    
+    
+  }
+  
+  return 0;
+}

@@ -1,0 +1,37 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) FOR(i,0,n)
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define ROF(i,a,b) for(int i=(a);i>(b);i--)
+#define all(a) (a).begin(),(a).end()
+#define UNIQUE(v) v.erase(unique(all(v)),v.end())
+typedef vector<int> vi;
+typedef vector< vi > vii;
+typedef vector<string> vs;
+typedef pair<int,int> pii;
+
+#define N 100000
+
+struct Node {
+  int parent, left, right;
+};
+
+Node T[N];
+
+main(){
+  int n; cin >> n;
+  int num,k;
+  vi child;
+  rep(i,n){
+    cin >> num >> k;
+    child.resize(k);
+    rep(j,k){
+      cin >> child[j];
+      T[child[j]].parent=num;
+      if(j==0) T[num].left=child[j];
+      else T[child[j-1]].right=child[j];
+    }
+  }
+  
+}

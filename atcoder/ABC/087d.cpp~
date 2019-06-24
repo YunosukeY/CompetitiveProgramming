@@ -1,0 +1,75 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) FOR(i,0,n)
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define ROF(i,a,b) for(int i=(a)-1;i>=(b);i--)
+#define all(a) (a).begin(),(a).end()
+#define UNIQUE(v) v.erase(unique(all(v)),v.end())
+#define SUM(a) accumlate(all(a),0)
+typedef vector<int> vi;
+typedef vector<vi> vii;
+typedef vector<string> vs;
+typedef pair<int,int> pii;
+typedef long long ll;
+
+#define inf 1<<29
+
+vi check;
+vii g;
+int n;
+vi indeg;
+vi posi;
+
+bool bfs(int i){
+  queue<int> q;
+  q.push(i);
+  check[i]=1;
+  while(!q.empty()){
+    int a = q.front();
+    q.pop();
+
+    rep(j,n){
+      if(g[i][j] != inf){
+	indeg[j]--;
+	if(posi[j]!=0 and posi[i]+g[i][j]!=posi[j])
+	  return false;
+	posi[j]=posi[i]+g[i][j];
+	if(indeg[j]==0 and check[j]==0){
+	  check[j]=1;
+	  q.push(j);
+	}
+      }
+    }
+  }
+  return true;
+}
+
+main(){
+  int m; cin >> n >> m;
+  int l,r,d;
+
+  g = vii(n,vi(n,inf));
+  indeg = vi(n,0);
+  check = vi(n,0);
+  
+  rep(i,m){
+    cin >> l >> r >> d;
+    g[l-1][r-1] = d;
+    indeg[r-1]++;
+  }
+
+  posi = vi(n,0);
+
+  rep(i,n){
+    if(indeg[i]==0 and check[i]==0)
+      if(bfs(i)==false){
+	cout << "No\n";
+	return 0;
+      }
+  }
+  cout << "Yes\n";
+}
+  
+
+  

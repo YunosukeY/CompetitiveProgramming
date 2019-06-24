@@ -1,0 +1,29 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) FOR(i,0,n)
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define ROF(i,a,b) for(int i=(a);i>=(b);i--)
+#define all(a) (a).begin(),(a).end()
+#define UNIQUE(v) v.erase(unique(all(v)),v.end())
+typedef vector<int> vi;
+typedef vector<vi> vii;
+typedef vector<string> vs;
+typedef pair<int,int> pii;
+
+main(){
+  string s; cin >> s;
+  int apos,zpos;
+  rep(i,s.size())
+    if(s[i] == 'A'){
+      apos = i;
+      break;
+    }
+  ROF(i,s.size()-1,0)
+    if(s[i] == 'Z'){
+      zpos = i;
+      break;
+    }
+
+  cout << s.substr(i,j-i+1) << endl;
+}

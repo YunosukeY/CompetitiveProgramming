@@ -1,0 +1,45 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) for(int i=0;i<(n);i++)
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define ROF(i,a,b) for(int i=(a)-1;i>=(b);i--)
+#define all(a) (a).begin(),(a).end()
+#define rall(a) (a).rbegin(),(a).rend() //sortで大きい順
+#define UNIQUE(v) v.erase(unique(all(v)),v.end())
+#define SUM(a) accumlate(all(a),0)
+#define pb push_back
+#define fst first
+#define snd second
+typedef vector<int> vi;
+typedef vector<vi> vvi;
+typedef vector<string> vs;
+typedef pair<int,int> pii;
+typedef long long ll;
+
+bool same(string s, string t){
+  rep(i,s.size())
+    if(s[i] == '?') continue;
+    else if(s[i] == t[i]) continue;
+    else return false;
+  return true;
+}
+
+main(){
+  string s, t; cin >> s >> t;
+
+  ROF(i,s.size()-t.size()+1,0)
+    if(same(s.substr(i,t.size()),t)){
+      rep(j,i)
+	if(s[j] == '?') cout << "a";
+	else cout << s[j];
+      cout << t;
+      FOR(j,i + t.size(),s.size())
+	if(s[j] == '?') cout << "a";
+	else cout << s[j];
+      cout << endl;
+      return 0;
+    }
+
+  cout << "UNRESTORABLE\n";
+}

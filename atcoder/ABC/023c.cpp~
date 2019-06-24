@@ -1,0 +1,25 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) for(i=0;i<(n);i++)
+#define For(i,a,b) for(i=(a);i<(b);i++)
+#define all(x) (x).begin(),(x).end()
+typedef long long ll;
+const double PI=acos(-1.0);
+
+
+int main(){
+  int i,j;
+  int R,C,k,n;
+  cin >> R >> C >> k >> n;
+  vector<int> r(n),c(n);
+  vector<int> x(n,0),y(n,0);
+  rep(i,n){
+    cin >> r[i] >> c[i];
+    x[r[i]]++;
+    y[c[i]]++;
+  }
+
+  
+  return 0;
+}

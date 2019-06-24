@@ -1,0 +1,24 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define rep(i,n) FOR(i,0,n)
+#define FOR(i,a,b) for(int i=(a);i<(b);i++)
+#define ROF(i,a,b) for(int i=(a)-1;i>=(b);i--)
+#define all(a) (a).begin(),(a).end()
+#define UNIQUE(v) v.erase(unique(all(v)),v.end())
+typedef vector<int> vi;
+typedef vector<vi> vii;
+typedef vector<string> vs;
+typedef pair<int,int> pii;
+typedef long long ll;
+
+main(){
+  int n; cin >> n;
+  vi a1((n+1)/2),a2(n/2);
+  rep(i,n){
+    if(n%2==0) cin >> a1[i/2];
+    else cin >> a2[(a-1)/2];
+  }
+  if(n%2==0){
+    ROF(i,n/2,0) count << a2[i];
+    rep(i,n/2) cout << a1[i];
