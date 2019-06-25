@@ -5,7 +5,7 @@ const double INF = 1e12;
 // 点
 typedef complex<double> P;
 namespace std {
-  bool operator < (const P& a, const P& b) {
+  bool operator < (const P& a, const P& b) { // 辞書順
     return real(a) != real(b) ? real(a) < real(b) : imag(a) < imag(b);
   }
   bool isnan(const P&p){

@@ -63,6 +63,15 @@ double distanceLP(const L &l, const P &p) {
   return abs(p - projection(l, p));
 }
 
+// 直線lを垂線右方向にdis移動
+L slideL(L l, double dis){
+  double deg = arg(l[1]-l[0]);
+  P p = P(dis*sin(deg),-dis*cos(deg));
+  l[0] += p;
+  l[1] += p;
+  return l;
+}
+
 signed main(){
   int n;
   double w,h,r;
@@ -92,16 +101,8 @@ signed main(){
 
       // 元の直線からr+t平行移動した直線l,rを用意
       // 交点が候補の候補となる
-      double thetai = arg(ls[i][1]-ls[i][0]), thetaj = arg(ls[j][1]-ls[j][0]);
-      L li{ls[i]}, ri{ls[i]}, lj{ls[j]}, rj{ls[j]};
-      P tmpi{(r+ts[i])*sin(thetai),-(r+ts[i])*cos(thetai)};
-      P tmpj{(r+ts[j])*sin(thetaj),-(r+ts[j])*cos(thetaj)};
-      rep(k,2){
-	li[k] -= tmpi;
-	ri[k] += tmpi;
-	lj[k] -= tmpj;
-	rj[k] += tmpj;
-      }
+      L li = slideL(ls[i],-r-ts[i]), ri = slideL(ls[i],r+ts[i]);
+      L lj = slideL(ls[j],-r-ts[j]), rj = slideL(ls[j],r+ts[j]);
       vector<P> tmpcan;
       tmpcan.push_back(crosspoint(li,lj));
       tmpcan.push_back(crosspoint(li,rj));

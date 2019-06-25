@@ -40,6 +40,10 @@ bool intersectCL(const C &c, const L &l){
   return distanceLP(l, c.p) - EPS < c.r;
 }
 
+// 円と線分
+bool intersectCS(const C &c, const L &s){
+  return distanceSP(s,c.p) - EPS < c.r and max(abs(c.p-s[0]),abs(c.p-s[1])) + EPS > r;
+
 // 円と点
 bool intersectCP(const C &c, const P &p){
   return abs(distancePP(c.p, p) - c.r) < EPS;
