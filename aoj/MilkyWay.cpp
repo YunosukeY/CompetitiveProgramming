@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include "../test.cpp"
 using namespace std;
 
 #define rep(i,n) for(int i=0,i##_cond=(n);i<i##_cond;++i)
@@ -7,7 +8,7 @@ using namespace std;
 template<class T>bool chmin(T &a, const T &b){if(a>b){a=b; return true;} return false;}
 
 const double EPS = 1e-8;
-const double INF = 1e12;
+//const double INF = 1e12;
 // 点
 typedef complex<double> P;
 
@@ -154,6 +155,7 @@ int main(){
 	d += diff;
       }
     }
+    plot(stars[0][0],stars[0][1],stars[0][2],stars[0][3],stars[0][4],stars[1][0],stars[1][1],stars[1][2],stars[1][3],stars[1][4],stars[2][0],stars[2][1],stars[2][2],stars[2][3],stars[2][4]);
 
     // グラフを作る
     vector<vector<edge>> g(n);

@@ -47,3 +47,39 @@ vector<L> tangentCP(const C &c, const P &p){
     ret.push_back(L(p, p+v2));
   return ret;
 }
+
+// 点を通る凸多角形への接線
+bool solveT(const G &g, const P &p, int ok, int mid, bool isRight){
+  int n = g.size();
+  int a = ccw(g[(ok-1+n)%n],g[ok],p), b = ccw(g[(mid-1+n)%n],g[mid%n],p);
+  bool f;
+  if(isRight)
+    f = a != -1 and (b != 1 or ccw(g[ok],g[mid%n],p) != 1);
+  else
+    f = a != 1 or (b != -1 and ccw(g[(ok-1+n)%n],g[(mid-1+n)%n],p) != 1);
+  return f;
+}
+int bsT(const G &g, const P &p, int _ok, int _ng, bool isRight){
+  int ok = _ok;
+  int ng = _ng;
+
+  while(abs(ok - ng) > 1){
+    int mid = (ok + ng) / 2;
+    if(solveT(g, p, ok, mid, isRight)){
+      ng = mid;
+    }else{
+      ok = mid;
+    }
+  }
+  if(isRight) return ok;
+  else return ng % g.size();
+}
+vector<L> tangentGP(const G &g, const P &p){
+  vector<L> res;
+  rep(i,2){
+    dump(i);
+    int pos = bsT(g,p,0,g.size()+1,i);
+    res.push_back(L(p,g[pos]));
+  }
+  return res;
+}

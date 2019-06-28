@@ -1,9 +1,12 @@
 // 凸多角形の面積の2倍
-double area2(const G& poly){
-  double A = 0;
-  for(int i = 0; i < poly.size(); ++i) 
-    A += cross(poly[i], poly[(i+1)%poly.size()]);
-  return A;
+double area(const G& g) {
+  int n = g.size();
+  double s = 0.0;
+  for(int i = 0; i < n; i++){
+    int j = (i+1)%n;
+    s += cross(g[i], g[j])/2;
+  }
+  return abs(s);
 }
 
 // 2円の共通部分の面積
