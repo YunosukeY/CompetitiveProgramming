@@ -32,7 +32,7 @@ vector<P> crosspointCL(const C& c, const L& l){
   }
   return res;
 }
-
+ww
 // 点を通る円への接線
 vector<L> tangentCP(const C &c, const P &p){
   vector<L> ret;
@@ -55,8 +55,10 @@ bool solveT(const G &g, const P &p, int ok, int mid, bool isRight){
   bool f;
   if(isRight)
     f = a != -1 and (b != 1 or ccw(g[ok],g[mid%n],p) != 1);
-  else
-    f = a != 1 or (b != -1 and ccw(g[(ok-1+n)%n],g[(mid-1+n)%n],p) != 1);
+  else{
+    int c = ccw(g[(ok-1+n)%n],g[(mid-1+n)%n],p);
+    f = (a != 1 and c != -1) or (b != -1 and c != 1);
+  }
   return f;
 }
 int bsT(const G &g, const P &p, int _ok, int _ng, bool isRight){
@@ -71,13 +73,11 @@ int bsT(const G &g, const P &p, int _ok, int _ng, bool isRight){
       ok = mid;
     }
   }
-  if(isRight) return ok;
-  else return ng % g.size();
+  return ok;
 }
 vector<L> tangentGP(const G &g, const P &p){
   vector<L> res;
   rep(i,2){
-    dump(i);
     int pos = bsT(g,p,0,g.size()+1,i);
     res.push_back(L(p,g[pos]));
   }

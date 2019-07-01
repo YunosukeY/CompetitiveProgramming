@@ -11,7 +11,7 @@ using namespace cv;
 
 using ComplexArg = double;
 
-/***************************************************************/
+/******************** 幾何の基本要素 ********************/
 
 const ComplexArg INF = 1e12;
 
@@ -34,7 +34,7 @@ struct C {
   C(const P &p_, ComplexArg r_):p(p_),r(r_){}
 };
 
-/***************************************************************/
+/******************** 描画用関数 ********************/
 
 // corner value
 struct CValue{
@@ -60,13 +60,27 @@ struct CValue{
 CValue calcCornerEach(const P &p){
   return CValue(p);
 }
-// L, G (vector<complex<ComplexArg>>)
-template<class Container>
-auto calcCornerEach(const Container &container)
-  -> typename conditional<true, CValue, decltype(container.begin())>::type{
+// L
+CValue calcCornerEach(const L &l){
   CValue res;
-  for(auto p : container){
+  for(auto p : l){
     res.update(CValue(p));
+  }
+  return res;
+}
+// G
+CValue calcCornerEach(const G &g){
+  CValue res;
+  for(auto p : g){
+    res.update(CValue(p));
+  }
+  return res;
+}
+// vector<L>
+CValue calcCornerEach(const vector<L> &ls){
+  CValue res;
+  for(auto l : ls){
+    res.update(calcCornerEach(l));
   }
   return res;
 }
@@ -116,7 +130,6 @@ P coordinateTrans(P p){
 
 void addAxis(Mat &mat){
   P origin = coordinateTrans(P(0,0));
-  // dump(origin);
   line(mat, Point(origin.real(), 0), Point(origin.real(), totalw-1), Scalar(0,0,0));
   line(mat, Point(0, origin.imag()), Point(totalw-1, origin.imag()), Scalar(0,0,0));
 }
@@ -127,17 +140,27 @@ void addElemEach(Mat &mat, const P &p){
   // dump(after);
   circle(mat, Point(after.real(),after.imag()), 3, Scalar(0,0,0), -1);
 }
-// L, G case
-template<class Container>
-auto addElemEach(Mat &mat, const Container &container)
-  -> typename conditional<true, void, decltype(container.begin())>::type{
-  int n = container.size();
+// L case
+void addElemEach(Mat &mat, const L &l){
+  P startp = l[0], endp = l[1];
+  startp = coordinateTrans(startp);
+  endp = coordinateTrans(endp);
+  line(mat, Point(startp.real(),startp.imag()), Point(endp.real(),endp.imag()), Scalar(0,0,0));
+}
+// G case
+void addElemEach(Mat &mat, const G &g){
+  int n = g.size();
   for(int i = 0; i < n; i++){
-    P startp = container[i], endp = container[(i+1)%n];
+    P startp = g[i], endp = g[(i+1)%n];
     startp = coordinateTrans(startp);
     endp = coordinateTrans(endp);
     line(mat, Point(startp.real(),startp.imag()), Point(endp.real(),endp.imag()), Scalar(0,0,0));
   }
+}
+// vector<L> case
+void addElemEach(Mat &mat, const vector<L> &ls){
+  for(auto l : ls)
+    addElemEach(mat,l);
 }
 // C case
 void addElemEach(Mat &mat, const C &c){
@@ -159,14 +182,11 @@ template<class Head, class... Tail>
 void plot(const Head& head, Tail&... tail){
   CValue cvalue(0,0,0,0); // 原点
   cvalue.update(calcCorner(head,tail...));
-  //dump(cvalue.xmin, cvalue.xmax, cvalue.ymin, cvalue.ymax);
 
   width = max(cvalue.xmax-cvalue.xmin, cvalue.ymax-cvalue.ymin);
   xcenter = (cvalue.xmin + cvalue.xmax) / 2;
   ycenter = (cvalue.ymin + cvalue.ymax) / 2;
-  //dump(width, xcenter, ycenter);
   scale = realw / width; // 複素平面でも1が画像で幾つか
-  //dump(realw, scale);
 
   Mat mat = createWhiteImage();
   addAxis(mat);
