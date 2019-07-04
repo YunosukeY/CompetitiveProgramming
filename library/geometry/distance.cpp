@@ -24,7 +24,7 @@ double distanceLS(const L &l, const L &s) {
 }
 // 線分と点
 double distanceSP(const L &s, const P &p) {
-  const P r = projection(s, p);
+  const P r(projection(s, p));
   if (intersectSP(s, r)) return abs(r - p);
   return min(abs(s[0] - p), abs(s[1] - p));
 }

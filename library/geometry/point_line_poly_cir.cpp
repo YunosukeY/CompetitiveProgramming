@@ -3,7 +3,7 @@
 const double EPS = 1e-8;
 const double INF = 1e12;
 // 点
-typedef complex<double> P;
+using P =  complex<double>;
 namespace std {
   bool operator < (const P& a, const P& b) { // 辞書順
     return real(a) != real(b) ? real(a) < real(b) : imag(a) < imag(b);
@@ -31,7 +31,7 @@ struct L : public vector<P> {
 
 // 多角形
 // 頂点は反時計にすること
-typedef vector<P> G;
+using G = vector<P>;
 
 // 円
 struct C {

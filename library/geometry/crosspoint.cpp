@@ -14,17 +14,17 @@ pair<P, P> crosspointCC(const C& c1, const C& c2){
   double d = abs(c1.p - c2.p);
   double rc = (d*d + c1.r*c1.r - c2.r*c2.r) / (2*d);
   double rs = sqrt(c1.r*c1.r - rc*rc);
-  P diff = (c2.p - c1.p) / d;
+  P diff((c2.p - c1.p) / d);
   return make_pair(c1.p + diff * P(rc, rs), c1.p + diff * P(rc, -rs));
 }
 
 // 円と直線の交点
 vector<P> crosspointCL(const C& c, const L& l){
-  P h = perf(l, c.p);
+  P h(projection(l, c.p));
   double d = abs(h - c.p);
   vector<P> res;
   if(d < c.r - EPS){
-    P x = l.dir / abs(l.dir) * sqrt(c.r*c.r - d*d);
+    P x(l[1] / abs(l[1]) * sqrt(c.r*c.r - d*d));
     res.push_back(h + x);
     res.push_back(h - x);
   }else if(d < c.r + EPS){
@@ -32,16 +32,16 @@ vector<P> crosspointCL(const C& c, const L& l){
   }
   return res;
 }
-ww
+
 // 点を通る円への接線
 vector<L> tangentCP(const C &c, const P &p){
   vector<L> ret;
-  P vect = c.p - p;
+  P vect(c.p - p);
   double d = abs(vect);
   double l = sqrt(d*d-c.r*c.r);
   if(isnan(l)) return ret;
-  P v1 = vect * P(l / d,  c.r / d);
-  P v2 = vect * P(l / d, -c.r / d);
+  P v1(vect * P(l / d,  c.r / d));
+  P v2(vect * P(l / d, -c.r / d));
   ret.push_back(L(p, p+v1));
   if(l > EPS)
     ret.push_back(L(p, p+v2));

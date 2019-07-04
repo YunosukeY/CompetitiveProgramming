@@ -8,12 +8,12 @@ P rotateP(P p, const P &f, double deg){
 
 // lをfを中心にdeg回転
 L rotateL(L l, const P &f, double deg){
-  L res{f,f};
+  L res(l);
   rep(i,l.size()) res[i] = rotateP(l[i],f,deg);
   return res;
 }
 
-// lをfを中心にdeg回転
+// gをfを中心にdeg回転
 G rotateL(G g, const P &f, double deg){
   G res(g);
   rep(i,g.size()) res[i] = rotateP(g[i],f,deg);
