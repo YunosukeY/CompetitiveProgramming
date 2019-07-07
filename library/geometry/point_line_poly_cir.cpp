@@ -5,8 +5,11 @@ const double INF = 1e12;
 // 点
 using P =  complex<double>;
 namespace std {
-  bool operator < (const P& a, const P& b) { // 辞書順
+  bool operator <(const P &a, const P &b){ // 辞書順
     return real(a) != real(b) ? real(a) < real(b) : imag(a) < imag(b);
+  }
+  bool operator ==(const P &a, const P &b){
+    return abs(a-b) < EPS;
   }
   bool isnan(const P&p){
     return isnan(p.real()) or isnan(p.imag());
