@@ -24,7 +24,8 @@ vector<P> crosspointCL(const C& c, const L& l){
   double d = abs(h - c.p);
   vector<P> res;
   if(d < c.r - EPS){
-    P x(l[1] / abs(l[1]) * sqrt(c.r*c.r - d*d));
+    P dir = l[1] - l[0];
+    P x(dir / abs(dir) * sqrt(c.r*c.r - d*d));
     res.push_back(h + x);
     res.push_back(h - x);
   }else if(d < c.r + EPS){
