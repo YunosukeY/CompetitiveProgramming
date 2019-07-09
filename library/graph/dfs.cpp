@@ -17,7 +17,7 @@ int s(int p){ // pを根とする部分木のサイズを返す
   return res + 1;
 }
 
-void dfs(int s){ // sを根としてbfs
+void dfs(int s){ // sを根としてdfs
   stack<int> st;
   d[s] = 0;
   st.push(s);
