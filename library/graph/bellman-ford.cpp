@@ -5,8 +5,7 @@ using namespace std;
 #define FOR(i,a,b) for(int i=(a);i<(b);i++)
 #define ROF(i,a,b) for(int i=(a)-1;i>=(b);i--)
 typedef long long ll;
-
-#define MAX 100000
+ll inf = 1ll<<61;
 
 struct node{
   ll v, d;
@@ -25,15 +24,15 @@ public:
   vector<bool> nega;
   vector<ll> prev;
 
-  bellmanford(ll s, ll _m, vector<edge> &_G):m(_m),G(_G){ // s:始点
-    n = G.size();
-    dist.resize(n,1ll << 59);
+  bellmanford(ll s, ll _n, vector<edge> &_G):n(_n),G(_G){ // s:始点
+    m = G.size();
+    dist.resize(n,inf);
     prev.resize(n,-1);
     dist[s] = 0;
     
     rep(i, n-1) rep(j, m){
       ll u = G[j].from, v = G[j].to, c = G[j].d;
-      if(dist[v] > dist[u] + c){
+      if(dist[u] != inf and dist[v] > dist[u] + c){
 	dist[v] = dist[u] + c;
 	prev[v] = u;
       }
@@ -44,7 +43,7 @@ public:
     nega.resize(n,0);
     rep(i, n) rep(j, m){
       ll u = G[j].from, v = G[j].to, c = G[j].d;
-      if(dist[v] > dist[u] + c){
+      if(dist[v] != inf and dist[v] > dist[u] + c){
 	dist[v] = dist[u] + c;
 	nega[v] = true;
       }

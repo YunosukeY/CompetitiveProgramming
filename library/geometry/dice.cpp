@@ -3,7 +3,7 @@ struct die_t{
 };
 
 #define rotate_swap(x,a,b,c,d) swap(x.a, x.b); swap(x.b, x.c); swap(x.c, x.d);
-// rightがtopになるよう回転
+// topがrightになるよう回転
 void rotate_right(die_t& x){ rotate_swap(x,top,left,bottom,right); }
 void rotate_left(die_t& x){ rotate_swap(x,top,right,bottom,left); }
 void rotate_front(die_t& x){ rotate_swap(x,top,back,bottom,front); }

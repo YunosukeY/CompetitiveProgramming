@@ -5,7 +5,7 @@
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgcodecs.hpp>
 #include <opencv2/imgproc.hpp>
-#include "dump.hpp"
+//#include "dump.hpp"
 using namespace std;
 using namespace cv;
 
@@ -16,7 +16,7 @@ using ComplexArg = double;
 const ComplexArg INF = 1e12;
 
 // 点
-typedef complex<ComplexArg> P;
+using P = complex<ComplexArg>;
 
 // 直線
 struct L : public vector<P>{
@@ -26,7 +26,7 @@ struct L : public vector<P>{
 };
 
 // 多角形
-typedef vector<P> G;
+using G = vector<P>;
 
 // 円
 struct C {
