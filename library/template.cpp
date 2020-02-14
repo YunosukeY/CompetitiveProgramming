@@ -1,7 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-#define dump(a) cerr << #a << "\t" << a << endl
+#ifdef LOCAL
+#include "../../dump.hpp"
+#else
+#define dump(...)
+#endif
+
 #define int ll
 #define rep(i,n) for(int i=0,i##_cond=(n);i<i##_cond;++i)
 #define FOR(i,a,b) for(int i=(a),i##_cond=(b);i<i##_cond;++i)
@@ -9,7 +14,6 @@ using namespace std;
 #define all(a) (a).begin(),(a).end()
 #define rall(a) (a).rbegin(),(a).rend() //sortで降順
 #define SUM(a) accumulate(all(a),int(0))
-#define UNI(a) (a).erase(unique(all(a)),(a).end())
 using ll  = long long;
 using vi  = vector<int>;
 using vvi = vector<vi>;
